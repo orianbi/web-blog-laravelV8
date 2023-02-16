@@ -50,10 +50,14 @@ Route::get('/dashboard', function(){
     ]);
 })->middleware('auth');
 
-Route::group(['middleware' => ['auth','admin']], function(){
-
+Route::group(['middleware' => 'auth'], function(){
     Route::get('/dashboard/posts/checkSlug', [DashboardPostController::class, 'checkSlug']);
     Route::resource('/dashboard/posts', DashboardPostController::class);
+});
+
+Route::group(['middleware' => ['auth','admin']], function(){
+
+    
     Route::get('/dashboard/categories/checkSlugCategory', [DashboardCategoryController::class, 'checkSlugCategory']);
     Route::resource('/dashboard/categories', DashboardCategoryController::class)->except('show');
 });
