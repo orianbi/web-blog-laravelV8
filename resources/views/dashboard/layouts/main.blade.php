@@ -54,6 +54,9 @@
           .then(data => slug.value = data.slug)
     });
 
+    
+   
+
     document.addEventListener('trix-file-accept', function(e){
       e.preventDefault();
     })
@@ -74,5 +77,16 @@
 
 
     }
+    
   </script>
+  <script>
+    const name = document.querySelector('#name');
+    const slugCategory = document.querySelector('#slugCategory');
+
+    name.addEventListener('change', function(){
+        fetch('/dashboard/categories/checkSlugCategory?name=' + name.value)
+        .then(response => response.json())
+        .then(data => slugCategory.value = data.slugCategory)
+    });
+</script>
 </html>
